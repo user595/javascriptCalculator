@@ -1,0 +1,79 @@
+<html><head>
+<style>
+body {
+    background-color: grey;
+}
+button {
+    background-color: beige;
+    width: 70px;
+}
+input {
+    background-color: antiquewhite;
+    width: 50px;
+    margin-left: 80px;
+}
+.main {
+  padding-left: 30%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+.row {
+  padding-left: 30%;
+  width: 100%;
+  padding-top: .3%;
+  padding-bottom: .3%;
+}
+</style>
+</head><body><div class="main"><input name="message" readonly></input></div>
+<div class="row"><button onclick="buttonPress(1);">one</button><button onclick="buttonPress(2);">two</button><button onclick="buttonPress(3);">three</button></div><div class="row"><button onclick="buttonPress(4);">four</button><button onclick="buttonPress(5);">five</button><button onclick="buttonPress(6);">six</button></div><div class="row"><button onclick="buttonPress(7);">seven</button><button onclick="buttonPress(8);">eight</button><button onclick="buttonPress(9);">nine</button></div><div class="row"><button onclick="buttonPress(0);">zero</button><button onclick="buttonPress('reset');">reset</button><button onclick="buttonPress('.');">decimal</button></div>
+<hr><div class="row">
+<button onclick="buttonPress('+');">plus</button><button onclick="buttonPress('-');">minus</button><button onclick="buttonPress('=');">equal</button></div>
+<script>
+
+let previous_amount = 0;    
+let previous_operator = '';
+let current_amount = 0;    
+let total_amount = 0;    
+    
+function buttonPress(x) {
+    switch (x)
+    {
+        case '=' : {
+                        current_amount = document.getElementsByName('message')[0].value;
+                        if (previous_operator === '+')
+                            total_amount = Number.parseFloat(previous_amount) + Number.parseFloat(current_amount);
+                        else
+                            total_amount = Number.parseFloat(previous_amount) - (Number.parseFloat(current_amount) * 1);
+                        document.getElementsByName('message')[0].value = total_amount;
+                        break;
+                    }
+        case '+' : {                
+                        previous_operator = '+';
+                        previous_amount = document.getElementsByName('message')[0].value;
+                        document.getElementsByName('message')[0].value = '';
+                        break;
+                   }
+        case '-' : {                
+                        previous_operator = '-';
+                        previous_amount = document.getElementsByName('message')[0].value;
+                        document.getElementsByName('message')[0].value = '';
+                        break;
+                    }
+        case 'reset' : {                
+                        document.getElementsByName('message')[0].value = '';
+                        previous_operator = '';
+                        previous_amount = 0;
+                        current_amount = 0;
+                        total_amount = 0;
+                        break;
+                       }
+        
+        default : {
+                    document.getElementsByName('message')[0].value = 
+                    document.getElementsByName('message')[0].value + x;        
+                    break;}
+    }
+}/* function end */
+            
+</script>    
+</html>
